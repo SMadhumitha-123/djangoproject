@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My App{% endblock %}</title>
+</head>
+<body>
+    <h1>Welcome to the Employee Management System</h1>
+    <ul>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'employee_list' %}">Employee List</a></li>
+            <li><a href="{% url 'employee_logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'employee_login' %}">Login</a></li>
+        {% endif %}
+    </ul>
+    {% block content %}{% endblock %}
+</body>
+</html>

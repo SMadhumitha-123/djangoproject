@@ -1,0 +1,38 @@
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Mobile</th>
+            {% if user.is_superuser %}
+                <th>Actions</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+            <tr>
+                <td>{{ employee.emp_id }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.department }}</td>
+                <td>{{ employee.salary }}</td>
+                <td>{{ employee.mobile }}</td>
+                {% if user.is_superuser %}
+                    <td>
+                        <a href="{% url 'delete_employee' employee.emp_id %}">Delete</a>
+                    </td>
+                {% endif %}
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">No employees found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if user.is_superuser %}
+    <a href="{% url 'add_employee' %}">Add Employee</a>
+{% endif %}
